@@ -1,0 +1,28 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimary">@color/red_400</item>
+        <item name="colorPrimaryDark">@color/red_500</item>
+        <item name="colorAccent">@color/red_400</item>
+        <item name="colorControlNormal">@color/red_400</item>
+        <item name="colorControlActivated">@color/red_400</item>
+        <item name="colorControlHighlight">@color/red_400</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="AppStartTheme" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/pic_guide_0</item>
+        <item name="android:configChanges">
+            keyboardHidden|orientation|keyboard|screenSize|screenLayout
+        </item>
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+</resources>

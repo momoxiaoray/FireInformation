@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">消防安全</string>
+
+
+    <string name="title_home">首页</string>
+    <string name="title_dynamic">动态</string>
+    <string name="title_user">个人中心</string>
+</resources>

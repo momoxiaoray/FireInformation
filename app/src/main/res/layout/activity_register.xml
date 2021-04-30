@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/splash_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/dp_68"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher"
+        app:layout_constraintBottom_toTopOf="@+id/tl_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.312"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tl_name"
+        android:layout_width="@dimen/dp_220"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        app:layout_constraintBottom_toTopOf="@+id/tl_password"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tid_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入账号"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColorHint="@color/grey_400" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tl_password"
+        android:layout_width="@dimen/dp_220"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        app:boxBackgroundColor="@color/grey_300"
+        app:boxBackgroundMode="outline"
+        app:errorEnabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/tl_nickname"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tl_name"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tid_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入密码"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColorHint="@color/grey_400" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tl_nickname"
+        android:layout_width="@dimen/dp_220"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        app:boxBackgroundColor="@color/grey_300"
+        app:boxBackgroundMode="outline"
+        app:errorEnabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/btn_register"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tl_password"
+        app:passwordToggleEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tid_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入昵称"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColorHint="@color/grey_400" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/btn_register"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="@dimen/dp_220"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="注册"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tl_nickname" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!--    数据库名称-->
+    <dbname value="FireInformation" />
+    <!--    数据库版本-->
+    <version value="3" />
+    <!--    映射模型-->
+    <list>
+        <!--        这里需要完整的模型-->
+        <mapping class="com.xx.fire.model.User"/>
+        <mapping class="com.xx.fire.model.News"/>
+    </list>
+</litepal>
