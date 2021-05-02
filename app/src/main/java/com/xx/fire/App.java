@@ -6,6 +6,8 @@ import android.view.Display;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import androidx.multidex.MultiDex;
+
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
@@ -20,6 +22,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
         LitePal.initialize(this);
         Utils.init(this);
         Hawk.init(this).build();
@@ -28,9 +31,9 @@ public class App extends Application {
         //进入App就保存一个管理员
         User user = new User();
         user.setAccount("123456");
-        user.setPassWord("123456");
-        user.setManager(true);
-        user.setNickName("管理员");
+        user.setPassword("123456");
+        user.setIsmanager(true);
+        user.setNickname("管理员");
         user.save();
     }
 }

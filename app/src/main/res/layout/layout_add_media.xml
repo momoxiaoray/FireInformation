@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dp_88"
+    android:layout_height="@dimen/dp_88"
+    android:layout_marginTop="@dimen/dp_12"
+    android:id="@+id/btn_add"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_add_pic"
+    android:scaleType="center"
+    android:src="@mipmap/ic_add" />

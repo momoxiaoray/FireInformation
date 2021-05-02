@@ -1,10 +1,9 @@
-package com.xx.fire.activity.ui.home;
+package com.xx.fire.fragment.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,22 +23,18 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private String[] tabs = {"消防知识", "火灾新闻"};
     private List<ItemFragment> itemFragments =new ArrayList<>();
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         tabLayout = root.findViewById(R.id.tab_layout);
         viewPager = root.findViewById(R.id.viewpager);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-            }
-        });
+
         initView();
         return root;
     }

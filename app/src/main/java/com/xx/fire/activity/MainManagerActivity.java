@@ -1,17 +1,18 @@
-package com.xx.fire;
+package com.xx.fire.activity;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.xx.fire.R;
 import com.xx.fire.activity.BaseActivity;
 
 public class MainManagerActivity extends BaseActivity {
 
     @Override
     public int bindLayout() {
-        return 0;
+        return R.layout.activity_main_manager;
     }
 
     @Override

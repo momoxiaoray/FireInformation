@@ -5,4 +5,10 @@
     <string name="title_home">首页</string>
     <string name="title_dynamic">动态</string>
     <string name="title_user">个人中心</string>
+
+    <string name="news_title_1">消防知识</string>
+    <string name="news_title_2">火灾新闻</string>
+    <string name="scan_count">浏览数:%1$d</string>
+
+    <string name="recover">回复</string>
 </resources>

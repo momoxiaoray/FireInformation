@@ -9,5 +9,8 @@
         <!--        这里需要完整的模型-->
         <mapping class="com.xx.fire.model.User"/>
         <mapping class="com.xx.fire.model.News"/>
+        <mapping class="com.xx.fire.model.Comment"/>
+        <mapping class="com.xx.fire.model.Dynamic"/>
+        <mapping class="com.xx.fire.model.MediaData"/>
     </list>
 </litepal>

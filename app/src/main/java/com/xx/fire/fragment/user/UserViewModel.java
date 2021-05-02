@@ -1,4 +1,4 @@
-package com.xx.fire.activity.ui.user;
+package com.xx.fire.fragment.user;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

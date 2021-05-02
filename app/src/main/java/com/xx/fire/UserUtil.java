@@ -52,7 +52,7 @@ public class UserUtil {
     public static boolean checkPassword(String account, String password) {
         List<User> users = LitePal.select("account", "password").where("account = ?", account).find(User.class);
         if (users != null && users.size() > 0) {
-            return users.get(0).getPassWord().equals(password);
+            return users.get(0).getPassword().equals(password);
         }
         return false;
     }

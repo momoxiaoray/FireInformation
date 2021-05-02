@@ -45,7 +45,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void doBusiness(Context context) {
         handler = new IHandler(this);
-        handler.sendEmptyMessageDelayed(0, 3000);
+        handler.sendEmptyMessageDelayed(0, 200);
     }
 
     static class IHandler extends Handler {

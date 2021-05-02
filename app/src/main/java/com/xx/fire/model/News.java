@@ -1,12 +1,15 @@
 package com.xx.fire.model;
 
+import com.blankj.utilcode.util.CollectionUtils;
+
+import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class News extends LitePalSupport {
-
+public class News extends LitePalSupport implements Serializable {
     private String title;
     private String content;
     private String date;
@@ -14,11 +17,10 @@ public class News extends LitePalSupport {
     private int news_type = 0;
 
     //一条新闻可以有多个用户收藏操作
-    private List<User> users;
-
+    private List<User> users = new ArrayList<>();
 
     public List<User> getUsers() {
-        return users == null ? new ArrayList<>() : users;
+        return users;
     }
 
     public void setUsers(List<User> users) {
@@ -63,5 +65,17 @@ public class News extends LitePalSupport {
 
     public void setScan_count(int scan_count) {
         this.scan_count = scan_count;
+    }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", date='" + date + '\'' +
+                ", scan_count=" + scan_count +
+                ", news_type=" + news_type +
+                ", users=" + users +
+                '}';
     }
 }

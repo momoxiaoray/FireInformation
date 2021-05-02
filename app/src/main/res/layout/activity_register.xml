@@ -27,6 +27,8 @@
         android:layout_marginTop="@dimen/dp_16"
         app:layout_constraintBottom_toTopOf="@+id/tl_password"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:counterMaxLength="10"
+        app:counterEnabled="true"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/icon">
 
@@ -45,7 +47,6 @@
         android:id="@+id/tl_password"
         android:layout_width="@dimen/dp_220"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_12"
         app:boxBackgroundColor="@color/grey_300"
         app:boxBackgroundMode="outline"
         app:errorEnabled="false"
@@ -70,13 +71,15 @@
         android:id="@+id/tl_nickname"
         android:layout_width="@dimen/dp_220"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_8"
         app:boxBackgroundColor="@color/grey_300"
         app:boxBackgroundMode="outline"
         app:errorEnabled="false"
         app:layout_constraintBottom_toTopOf="@+id/btn_register"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:counterMaxLength="10"
+        app:counterEnabled="true"
         app:layout_constraintTop_toBottomOf="@+id/tl_password"
         app:passwordToggleEnabled="false">
 

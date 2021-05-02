@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_button"
@@ -48,9 +49,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_6"
+        android:layout_marginBottom="@dimen/dp_8"
         android:text="2020-10-10"
         android:textColor="@color/grey_400"
         android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/item_title"
         app:layout_constraintTop_toBottomOf="@+id/item_content" />
 

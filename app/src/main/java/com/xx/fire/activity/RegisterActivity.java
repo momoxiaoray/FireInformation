@@ -2,6 +2,8 @@ package com.xx.fire.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
@@ -39,7 +41,8 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
-
+        name.addTextChangedListener(getTextWatcher());
+        nickName.addTextChangedListener(getTextWatcher());
         findViewById(R.id.btn_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +61,10 @@ public class RegisterActivity extends BaseActivity {
                     T.showToast("请输入昵称");
                     return;
                 }
+                if (nickNameStr.length() > 10) {
+                    T.showToast("昵称太长了");
+                    return;
+                }
                 List<User> users = LitePal.select("account").where("account = ?", nameStr).find(User.class);
                 if (users != null && users.size() > 0) {
                     T.showToast("该用户已注册，请登录");
@@ -65,14 +72,38 @@ public class RegisterActivity extends BaseActivity {
                 }
                 User user = new User();
                 user.setAccount(nameStr);
-                user.setPassWord(passWordStr);
-                user.setNickName(nickNameStr);
+                user.setPassword(passWordStr);
+                user.setNickname(nickNameStr);
                 user.save();
                 T.showToast("注册成功");
                 finish();
             }
         });
     }
+
+    private TextWatcher getTextWatcher() {
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length()>10){
+                    editable.delete(editable.length()-1,editable.length());
+                    T.showToast("内容太长了");
+                }
+            }
+        };
+        return textWatcher;
+    }
+
 
     @Override
     public void doBusiness(Context context) {

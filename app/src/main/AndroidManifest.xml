@@ -2,11 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xx.fire">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -26,6 +30,13 @@
             android:name=".activity.LoginActivity"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.collect.CollectActivity" />
+        <activity android:name=".activity.newsdetail.NewsDetailActivity" />
+        <activity
+            android:name=".activity.dynamic.DynamicAddActivity"
+            android:windowSoftInputMode="stateAlwaysVisible" />
+        <activity android:name=".activity.PicShowActivity" />
+        <activity android:name=".activity.dynamic.DynamicDetailActivity" />
     </application>
 
 </manifest>

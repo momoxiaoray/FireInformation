@@ -45,11 +45,9 @@ public class LoginActivity extends BaseActivity {
     public void doBusiness(Context context) {
         name.setFocusable(true);
         name.requestFocus();
-        name.setText("12345");
-        password.setText("12345");
-        ActivityUtils.startActivity(MainActivity.class);
-        finish();
-        UserUtil.saveCurrentUser("12345");
+        name.setText("123456");
+        password.setText("123456");
+
     }
 
 

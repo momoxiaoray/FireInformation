@@ -1,7 +1,9 @@
 package com.xx.fire.adapter;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +15,26 @@ import com.xx.fire.UserUtil;
 import com.xx.fire.model.News;
 import com.xx.fire.model.User;
 
+import org.litepal.LitePal;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemNewsAdapter extends RecyclerView.Adapter<ItemNewsAdapter.ViewHolder> {
 
     private final List<News> mValues;
+    private OnItemActionListener onItemActionListener;
 
     public ItemNewsAdapter(List<News> items) {
         mValues = items;
+    }
+
+    public OnItemActionListener getOnItemActionListener() {
+        return onItemActionListener;
+    }
+
+    public void setOnItemActionListener(OnItemActionListener onItemActionListener) {
+        this.onItemActionListener = onItemActionListener;
     }
 
     @Override
@@ -50,8 +63,17 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<ItemNewsAdapter.ViewHo
         holder.content.setText(news.getContent());
         holder.date.setText(news.getDate());
         holder.scanCount.setText("浏览数:" + news.getScan_count());
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemActionListener!=null){
+                    onItemActionListener.onItemClick(news,position);
+                }
+            }
+        });
         User user = UserUtil.getCurrentUser();
-        if (news.getUsers() != null && news.getUsers().contains(user)) {
+        List<User> userList = news.getUsers();
+        if (userList != null && userList.contains(user)) {
             holder.collect.setImageResource(R.mipmap.ic_collect_ed);
         } else {
             holder.collect.setImageResource(R.mipmap.ic_collect_un);
@@ -59,22 +81,9 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<ItemNewsAdapter.ViewHo
         holder.collect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User user = UserUtil.getCurrentUser();
-                News news = mValues.get(position);
-                List<User> userList = news.getUsers();
-                if (userList == null) {
-                    userList = new ArrayList<>();
-                    userList.add(user);
-                } else {
-                    if (userList.contains(user)) {
-                        userList.remove(user);
-                    } else {
-                        userList.add(user);
-                    }
+                if (onItemActionListener!=null){
+                    onItemActionListener.onItemCollectClick(news,position);
                 }
-                news.setUsers(userList);
-                news.save();
-                notifyDataSetChanged();
             }
         });
     }
@@ -87,6 +96,7 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<ItemNewsAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title, content, date, scanCount;
         public ImageView collect;
+        public ConstraintLayout layout;
 
         public ViewHolder(View view) {
             super(view);
@@ -95,6 +105,15 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<ItemNewsAdapter.ViewHo
             date = (TextView) view.findViewById(R.id.item_date);
             scanCount = (TextView) view.findViewById(R.id.item_scan_count);
             collect = view.findViewById(R.id.btn_collect);
+            layout = view.findViewById(R.id.layout);
         }
+    }
+
+
+    public interface OnItemActionListener {
+        void onItemClick(News news,int position);
+
+        void onItemCollectClick(News news,int position);
+
     }
 }
