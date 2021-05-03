@@ -1,4 +1,4 @@
-package com.xx.fire.activity.newsdetail;
+package com.xx.fire.activity.information;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel;
 
 import com.xx.fire.model.News;
 
-public class NewsDetailViewModel extends ViewModel {
+public class DetailViewModel extends ViewModel {
 
     private MutableLiveData<News> newsModel;
 
-    public NewsDetailViewModel() {
+    public DetailViewModel() {
         newsModel = new MutableLiveData<>();
     }
 

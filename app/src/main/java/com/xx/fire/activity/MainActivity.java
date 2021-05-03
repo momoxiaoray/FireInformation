@@ -1,11 +1,15 @@
 package com.xx.fire.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.xx.fire.R;
+import com.xx.fire.UserUtil;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
     TextView title;
+    private long exitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,31 +30,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         title = findViewById(R.id.title);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.navigation_home, R.id.navigation_dynamic, R.id.navigation_user)
-//                .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                Log.e("MainActivity", "onDestinationChanged: id = " + destination.getId());
+                title.setText(destination.getLabel());
+            }
+        });
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-//        navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.navigation_home:
-//                        title.setText(R.string.title_home);
-//                        break;
-//                    case R.id.navigation_dynamic:
-//                        title.setText(R.string.title_dynamic);
-//                        break;
-//                    case R.id.navigation_user:
-//                        title.setText(R.string.title_user);
-//                        break;
-//                }
-//                return false;
-//            }
-//        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() < 2000 + exitTime) {
+            ActivityUtils.finishAllActivities();
+            finish();
+        } else {
+            exitTime = System.currentTimeMillis();
+            ToastUtils.showShort("再按一次退出程序");
+        }
     }
 
 }

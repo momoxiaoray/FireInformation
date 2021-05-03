@@ -1,5 +1,6 @@
 package com.xx.fire.model;
 
+import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
 
 import java.io.Serializable;
@@ -8,15 +9,34 @@ import java.util.Collections;
 import java.util.List;
 
 public class Dynamic extends LitePalSupport implements Serializable {
-
-    private User user;//动态发布人
+    private long id;
+    private long user_id;//动态发布人id
     private String date;//日期
     private String dynamic_content;//内容
-    private List<MediaData> media_list = new ArrayList<>();//媒体，图片或者视频
     private int zan;
+
+    private List<MediaData> media_list = new ArrayList<>();//媒体，图片或者视频
     private List<Comment> comment_list = new ArrayList<>();
+    private User user;
+
+    public long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(long user_id) {
+        this.user_id = user_id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public User getUser() {
+        this.user = LitePal.where("id = ?", String.valueOf(user_id)).findFirst(User.class);
         return user;
     }
 
@@ -57,6 +77,8 @@ public class Dynamic extends LitePalSupport implements Serializable {
     }
 
     public List<Comment> getComment_list() {
+        comment_list.clear();
+        comment_list.addAll(LitePal.where("dynamic_id = ?", String.valueOf(id)).order("id desc").find(Comment.class, true));
         return comment_list;
     }
 
@@ -67,7 +89,8 @@ public class Dynamic extends LitePalSupport implements Serializable {
     @Override
     public String toString() {
         return "Dynamic{" +
-                "user=" + user +
+                "id=" + id +
+                ", user=" + user +
                 ", date='" + date + '\'' +
                 ", dynamic_content='" + dynamic_content + '\'' +
                 ", media_list=" + media_list +

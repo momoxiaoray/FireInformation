@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.xx.fire">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:name=".App"
@@ -14,11 +21,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.xx.fire.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths_public" />
+        </provider>
+
+        <activity
+            android:name=".activity.manager.ManagerMainActivity"
+            android:label="@string/title_activity_mannager_main"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/title_home">
-
-        </activity>
+            android:label="@string/title_home" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,15 +47,19 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="stateAlwaysVisible" />
+            android:windowSoftInputMode="stateVisible" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.collect.CollectActivity" />
-        <activity android:name=".activity.newsdetail.NewsDetailActivity" />
+        <activity android:name=".activity.information.KnowledgeDetailActivity" />
         <activity
             android:name=".activity.dynamic.DynamicAddActivity"
-            android:windowSoftInputMode="stateAlwaysVisible" />
+            android:windowSoftInputMode="stateVisible" />
         <activity android:name=".activity.PicShowActivity" />
         <activity android:name=".activity.dynamic.DynamicDetailActivity" />
+        <activity
+            android:name=".activity.manager.edit.MangerNewsEditActivity"
+            android:windowSoftInputMode="stateVisible" />
+        <activity android:name=".activity.information.NewsDetailActivity" />
     </application>
 
 </manifest>

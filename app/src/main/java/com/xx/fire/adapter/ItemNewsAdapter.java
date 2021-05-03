@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.xx.fire.App;
 import com.xx.fire.R;
 import com.xx.fire.UserUtil;
 import com.xx.fire.model.News;
@@ -17,6 +19,7 @@ import com.xx.fire.model.User;
 
 import org.litepal.LitePal;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,11 +52,11 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<ItemNewsAdapter.ViewHo
         if (viewType == 0) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.layout_item_news, parent, false);
-        } else if (viewType == 1) {
-            view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.layout_item_news_fire, parent, false);
+            return new ViewHolder(view);
         }
-        return new ViewHolder(view);
+        view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.layout_item_news_fire, parent, false);
+        return new DataViewHolder(view);
     }
 
     @Override
@@ -66,8 +69,8 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<ItemNewsAdapter.ViewHo
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (onItemActionListener!=null){
-                    onItemActionListener.onItemClick(news,position);
+                if (onItemActionListener != null) {
+                    onItemActionListener.onItemClick(news, position);
                 }
             }
         });
@@ -81,11 +84,17 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<ItemNewsAdapter.ViewHo
         holder.collect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (onItemActionListener!=null){
-                    onItemActionListener.onItemCollectClick(news,position);
+                if (onItemActionListener != null) {
+                    onItemActionListener.onItemCollectClick(news, position);
                 }
             }
         });
+
+        if (holder instanceof DataViewHolder) {
+            Glide.with(App.getInstance())
+                    .load(new File(news.getCoverPath()))
+                    .into(((DataViewHolder) holder).item_pic);
+        }
     }
 
     @Override
@@ -109,11 +118,20 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<ItemNewsAdapter.ViewHo
         }
     }
 
+    public class DataViewHolder extends ViewHolder {
+        public ImageView item_pic;
+
+        public DataViewHolder(View view) {
+            super(view);
+            item_pic = view.findViewById(R.id.item_pic);
+        }
+    }
+
 
     public interface OnItemActionListener {
-        void onItemClick(News news,int position);
+        void onItemClick(News news, int position);
 
-        void onItemCollectClick(News news,int position);
+        void onItemCollectClick(News news, int position);
 
     }
 }

@@ -30,6 +30,7 @@ import com.xx.fire.model.MediaData;
 import com.xx.fire.model.News;
 import com.xx.fire.model.User;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class ItemDynamicAdapter extends RecyclerView.Adapter<ItemDynamicAdapter.ViewHolder> {
@@ -103,10 +104,11 @@ public class ItemDynamicAdapter extends RecyclerView.Adapter<ItemDynamicAdapter.
         ItemChildPicAdapter adapter = new ItemChildPicAdapter(mContext, mediaData);
         adapter.setOnItemActionListener(new ItemChildPicAdapter.OnItemActionListener() {
             @Override
-            public void onItemClick(MediaData data, int position) {
+            public void onItemClick(MediaData data, int i) {
                 if (data.getType() == 0) {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("mediaData", data);
+                    bundle.putInt("position", i);
+                    bundle.putSerializable("list", (Serializable) mValues.get(position).getMedia_list());
                     ActivityUtils.startActivity(bundle, PicShowActivity.class);
                 }
             }

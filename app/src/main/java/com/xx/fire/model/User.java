@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class User extends LitePalSupport implements Serializable {
-
+    private long id;
     private String account;
     private String nickname;
     private String password;
@@ -22,8 +22,27 @@ public class User extends LitePalSupport implements Serializable {
     //一个用户可以多个动态
     private List<Dynamic> dynamics = new ArrayList<>();
 
+    //一个用户多个评论
+    private List<Comment> comments = new ArrayList<>();
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     public List<Dynamic> getDynamics() {
         return dynamics;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setDynamics(List<Dynamic> dynamics) {

@@ -20,39 +20,35 @@ public class UserUtil {
         return Hawk.get(USER_INFO);
     }
 
-    public static void exit(){
+    public static void exit() {
         Hawk.deleteAll();
+    }
+
+    public static boolean isManager(String account) {
+        return App.getInstance().getManger().getAccount().equals(account);
     }
 
 
     public static boolean isExit(String account) {
-        List<User> users = LitePal.findAll(User.class);
-        if (users != null && users.size() > 0) {
-            for (User user : users) {
-                if (user.getAccount().equals(account)) {
-                    return true;
-                }
-            }
+        User user = LitePal.where("account = ?", account).findFirst(User.class);
+        if (user == null) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     public static User getUser(String account) {
-        List<User> users = LitePal.findAll(User.class);
-        if (users != null && users.size() > 0) {
-            for (User user : users) {
-                if (user.getAccount().equals(account)) {
-                    return user;
-                }
-            }
+        User user = LitePal.where("account = ?", account).findFirst(User.class);
+        if (user == null) {
+            return null;
         }
-        return null;
+        return user;
     }
 
     public static boolean checkPassword(String account, String password) {
-        List<User> users = LitePal.select("account", "password").where("account = ?", account).find(User.class);
-        if (users != null && users.size() > 0) {
-            return users.get(0).getPassword().equals(password);
+        User user = LitePal.select("account", "password").where("account = ?", account).findFirst(User.class);
+        if (user != null) {
+            return user.getPassword().equals(password);
         }
         return false;
     }

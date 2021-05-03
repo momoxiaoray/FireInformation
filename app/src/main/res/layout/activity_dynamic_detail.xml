@@ -98,7 +98,7 @@
         android:text="0"
         android:textColor="#999999"
         android:textSize="@dimen/sp_12"
-        app:layout_constraintRight_toRightOf="@+id/item_recycler"
+        app:layout_constraintRight_toRightOf="@+id/item_content"
         app:layout_constraintTop_toBottomOf="@+id/item_recycler" />
 
 
@@ -124,7 +124,7 @@
         android:layout_marginTop="@dimen/dp_8"
         android:background="@color/grey_300"
         app:layout_constraintLeft_toLeftOf="@+id/item_icon"
-        app:layout_constraintRight_toRightOf="@+id/item_recycler"
+        app:layout_constraintRight_toRightOf="@+id/item_content"
         app:layout_constraintTop_toBottomOf="@+id/item_zan" />
 
     <TextView

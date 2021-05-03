@@ -46,18 +46,18 @@ public class DynamicDetailViewModel extends ViewModel {
             comment.setStyle(0);
         } else {
             comment.setStyle(1);
-            comment.setRecover_user(commentCome.getComment_username());
+            comment.setRecover_user(commentCome.getUser().getNickname());
             comment.setRecover_content(commentCome.getComment_content());
         }
-        comment.setComment_username(UserUtil.getCurrentUser().getNickname());
+        comment.setUser_id(UserUtil.getCurrentUser().getId());
+        comment.setUser(UserUtil.getCurrentUser());
         comment.setDate(TimeUtils.getNowString());
         comment.setComment_content(content);
+        comment.setDynamic_id(dynamic.getId());
         comment.save();
-        dynamic.getComment_list().add(0, comment);
-        dynamic.saveOrUpdate();
+        dynamic.getComment_list().add(comment);
+        dynamic.update(dynamic.getId());
         liveData.setValue(dynamic);
-
-
         List<Comment> comments = LitePal.findAll(Comment.class, true);
         for (int i = 0; i < comments.size(); i++) {
             Log.d("comment", comments.get(i).toString());

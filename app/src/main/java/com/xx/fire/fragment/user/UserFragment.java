@@ -18,6 +18,7 @@ import com.xx.fire.UserUtil;
 import com.xx.fire.activity.LoginActivity;
 import com.xx.fire.activity.collect.CollectActivity;
 import com.xx.fire.model.User;
+import com.xx.fire.util.T;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -49,7 +50,7 @@ public class UserFragment extends Fragment {
                 ActivityUtils.startActivity(CollectActivity.class);
                 break;
             case R.id.about:
-
+                T.showToast("这是一个关于消防知识的软件，o(*≧▽≦)ツ");
                 break;
             case R.id.btn_login_out:
                 UserUtil.exit();

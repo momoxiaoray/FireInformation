@@ -3,7 +3,7 @@
     <!--    数据库名称-->
     <dbname value="FireInformation" />
     <!--    数据库版本-->
-    <version value="3" />
+    <version value="8" />
     <!--    映射模型-->
     <list>
         <!--        这里需要完整的模型-->

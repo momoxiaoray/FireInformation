@@ -61,7 +61,7 @@
         android:paddingTop="@dimen/dp_3"
         android:paddingRight="@dimen/dp_14"
         android:paddingBottom="@dimen/dp_3"
-        android:textColor="@color/grey_700"
+        android:textColor="@color/white"
         android:textSize="@dimen/sp_13"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

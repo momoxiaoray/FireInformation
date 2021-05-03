@@ -10,14 +10,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class News extends LitePalSupport implements Serializable {
+    private long id;
     private String title;
     private String content;
     private String date;
     private int scan_count;
     private int news_type = 0;
+    private String coverPath;//封面图
 
     //一条新闻可以有多个用户收藏操作
     private List<User> users = new ArrayList<>();
+
+    public String getCoverPath() {
+        return coverPath;
+    }
+
+    public void setCoverPath(String coverPath) {
+        this.coverPath = coverPath;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public List<User> getUsers() {
         return users;
@@ -36,7 +54,7 @@ public class News extends LitePalSupport implements Serializable {
     }
 
     public String getTitle() {
-        return title;
+        return title == null ? "" : title;
     }
 
     public void setTitle(String title) {
@@ -44,7 +62,7 @@ public class News extends LitePalSupport implements Serializable {
     }
 
     public String getContent() {
-        return content;
+        return content == null ? "" : content;
     }
 
     public void setContent(String content) {
@@ -70,7 +88,8 @@ public class News extends LitePalSupport implements Serializable {
     @Override
     public String toString() {
         return "News{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", date='" + date + '\'' +
                 ", scan_count=" + scan_count +

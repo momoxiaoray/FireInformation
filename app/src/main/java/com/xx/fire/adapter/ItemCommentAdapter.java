@@ -48,7 +48,7 @@ public class ItemCommentAdapter extends RecyclerView.Adapter<ItemCommentAdapter.
     @Override
     public void onBindViewHolder(final DataViewHolder holder, int position) {
         Comment comment = mValues.get(position);
-        holder.name.setText(comment.getComment_username());
+        holder.name.setText(comment.getUser().getNickname());
         holder.comment.setText(comment.getComment_content());
         holder.date.setText(comment.getDate());
         //这里表示回复

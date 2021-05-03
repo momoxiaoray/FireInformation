@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_button"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_marginTop="@dimen/dp_12"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="新闻标题"
+        android:textColor="@color/grey_900"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btn_delete"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"
+        android:src="@mipmap/ic_remove"
+        app:layout_constraintBottom_toBottomOf="@+id/item_title"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_title" />
+
+    <ImageView
+        android:id="@+id/item_pic"
+        android:layout_width="@dimen/dp_64"
+        android:layout_height="@dimen/dp_64"
+        android:scaleType="centerCrop"
+        android:background="@color/grey_300"
+        android:layout_marginTop="@dimen/dp_8"
+        app:layout_constraintTop_toBottomOf="@+id/item_title"
+        app:layout_constraintLeft_toLeftOf="@+id/item_title"
+        />
+
+    <TextView
+        android:id="@+id/item_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_16"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:text="新闻新闻内容新闻内容新新闻新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容内容闻内容新闻内容新闻内容新闻内容新闻内容内容"
+        android:textColor="@color/grey_700"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintLeft_toRightOf="@+id/item_pic"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_pic" />
+
+    <TextView
+        android:id="@+id/item_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:text="2020-10-10"
+        android:textColor="@color/grey_400"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/item_title"
+        app:layout_constraintTop_toBottomOf="@+id/item_pic" />
+
+    <TextView
+        android:id="@+id/item_scan_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="浏览数：1234"
+        android:textColor="@color/grey_400"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintRight_toRightOf="@+id/item_content"
+        app:layout_constraintTop_toTopOf="@+id/item_date" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

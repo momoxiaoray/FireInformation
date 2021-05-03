@@ -3,30 +3,24 @@ package com.xx.fire.activity.collect;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.TimeUtils;
 import com.xx.fire.R;
-import com.xx.fire.UserUtil;
 import com.xx.fire.activity.BaseActivity;
-import com.xx.fire.activity.newsdetail.NewsDetailActivity;
-import com.xx.fire.activity.newsdetail.NewsDetailViewModel;
-import com.xx.fire.adapter.ItemNewsAdapter;
+import com.xx.fire.activity.information.KnowledgeDetailActivity;
+import com.xx.fire.activity.information.NewsDetailActivity;
+import com.xx.fire.adapter.ItemCollectAdapter;
 import com.xx.fire.model.News;
-import com.xx.fire.model.User;
 import com.xx.fire.view.RecycleViewDivider;
 
-import org.litepal.LitePal;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,7 +28,9 @@ import butterknife.BindView;
 public class CollectActivity extends BaseActivity {
     @BindView(R.id.list)
     RecyclerView dataRecycler;
-    private ItemNewsAdapter adapter;
+    @BindView(R.id.no_data_view)
+    TextView no_data_view;
+    private ItemCollectAdapter adapter;
     private CollectViewModel viewModel;
 
     @Override
@@ -55,15 +51,19 @@ public class CollectActivity extends BaseActivity {
         viewModel.getData().observe(this, new Observer<List<News>>() {
             @Override
             public void onChanged(List<News> news) {
+                no_data_view.setVisibility(news == null || news.size() == 0 ? View.VISIBLE : View.GONE);
                 if (adapter == null) {
-                    adapter = new ItemNewsAdapter(news);
-                    adapter.setOnItemActionListener(new ItemNewsAdapter.OnItemActionListener() {
+                    adapter = new ItemCollectAdapter(mContext, news);
+                    adapter.setOnItemActionListener(new ItemCollectAdapter.OnItemActionListener() {
                         @Override
                         public void onItemClick(News news, int position) {
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("data", news);
-                            bundle.putInt("style", news.getNews_type());
-                            ActivityUtils.startActivity(bundle, NewsDetailActivity.class);
+                            if (news.getNews_type() == 0) {
+                                ActivityUtils.startActivity(bundle, KnowledgeDetailActivity.class);
+                            } else {
+                                ActivityUtils.startActivity(bundle, NewsDetailActivity.class);
+                            }
                         }
 
                         @Override

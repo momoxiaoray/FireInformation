@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.blankj.utilcode.util.TimeUtils;
+import com.huantansheng.easyphotos.models.album.entity.Photo;
 import com.xx.fire.UserUtil;
 import com.xx.fire.model.Dynamic;
 import com.xx.fire.model.MediaData;
@@ -18,6 +19,7 @@ public class DynamicAddViewModel extends ViewModel {
 
     private MutableLiveData<List<MediaData>> liveData;
     private List<MediaData> mediaDataList = new ArrayList<>();
+    private ArrayList<Photo> imageItems = new ArrayList<>();
 
     public DynamicAddViewModel() {
         liveData = new MutableLiveData<>();
@@ -30,7 +32,7 @@ public class DynamicAddViewModel extends ViewModel {
     public void saveDynamic(String content) {
         Dynamic dynamic = new Dynamic();
         dynamic.setDate(TimeUtils.getNowString());
-        dynamic.setUser(UserUtil.getCurrentUser());
+        dynamic.setUser_id(UserUtil.getCurrentUser().getId());
         dynamic.setDynamic_content(content);
         dynamic.setZan(0);
         List<MediaData> list = new ArrayList<>();
@@ -44,17 +46,37 @@ public class DynamicAddViewModel extends ViewModel {
         dynamic.save();
     }
 
-    public void add(String path, boolean isPic) {
-        MediaData mediaData = new MediaData();
-        mediaData.setType(isPic ? 0 : 1);
-        mediaData.setPath(path);
-        mediaDataList.add(0, mediaData);
-        liveData.setValue(mediaDataList);
-    }
-
     public void remove(int position) {
         mediaDataList.remove(position);
         liveData.setValue(mediaDataList);
+    }
+
+    public ArrayList<Photo> getImageItems() {
+        return imageItems;
+    }
+
+    public void setImageItems(List<Photo> imageItems) {
+        if (imageItems == null)
+            return;
+        this.imageItems.clear();
+        this.imageItems.addAll(imageItems);
+        for (int i = 0; i < imageItems.size(); i++) {
+            MediaData mediaData = new MediaData();
+            mediaData.setType(0);
+            mediaData.setPath(imageItems.get(i).path);
+            mediaDataList.add(0, mediaData);
+        }
+        liveData.setValue(mediaDataList);
+    }
+
+    public List<MediaData> getMediaData() {
+        List<MediaData> medias = new ArrayList<>();
+        for (int i = 0; i < mediaDataList.size(); i++) {
+            if (mediaDataList.get(i).getType() != -1) {
+                medias.add(mediaDataList.get(i));
+            }
+        }
+        return medias;
     }
 
     public LiveData<List<MediaData>> getData() {

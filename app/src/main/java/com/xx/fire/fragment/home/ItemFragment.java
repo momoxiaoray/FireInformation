@@ -2,7 +2,6 @@ package com.xx.fire.fragment.home;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -10,21 +9,18 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.TimeUtils;
 import com.xx.fire.R;
-import com.xx.fire.UserUtil;
-import com.xx.fire.activity.newsdetail.NewsDetailActivity;
+import com.xx.fire.activity.information.KnowledgeDetailActivity;
+import com.xx.fire.activity.information.NewsDetailActivity;
 import com.xx.fire.adapter.ItemNewsAdapter;
 import com.xx.fire.model.News;
 import com.xx.fire.view.RecycleViewDivider;
-
-import org.litepal.LitePal;
 
 import java.util.List;
 
@@ -37,7 +33,7 @@ public class ItemFragment extends Fragment {
     private RecyclerView dataRecycler;
     private ItemNewsAdapter adapter;
     private ItemViewModel viewModel;
-
+    private TextView no_data_view;
 
     public ItemFragment() {
     }
@@ -64,6 +60,7 @@ public class ItemFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
         dataRecycler = view.findViewById(R.id.list);
+        no_data_view = view.findViewById(R.id.no_data_view);
         dataRecycler.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayoutManager.HORIZONTAL, 1,
                 ContextCompat.getColor(getContext(), R.color.grey_300)));
         initData();
@@ -74,6 +71,7 @@ public class ItemFragment extends Fragment {
         viewModel.getData(style).observe(getViewLifecycleOwner(), new Observer<List<News>>() {
             @Override
             public void onChanged(List<News> news) {
+                no_data_view.setVisibility(news == null || news.size() == 0 ? View.VISIBLE : View.GONE);
                 if (adapter == null) {
                     adapter = new ItemNewsAdapter(news);
                     adapter.setOnItemActionListener(new ItemNewsAdapter.OnItemActionListener() {
@@ -82,7 +80,11 @@ public class ItemFragment extends Fragment {
                             viewModel.addScanCount(position);
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("data", news);
-                            ActivityUtils.startActivity(bundle, NewsDetailActivity.class);
+                            if (style == 0) {
+                                ActivityUtils.startActivity(bundle, KnowledgeDetailActivity.class);
+                            } else {
+                                ActivityUtils.startActivity(bundle, NewsDetailActivity.class);
+                            }
                         }
 
                         @Override

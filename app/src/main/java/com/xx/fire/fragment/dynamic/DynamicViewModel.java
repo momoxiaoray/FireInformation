@@ -21,19 +21,15 @@ import java.util.List;
 public class DynamicViewModel extends ViewModel {
 
     private MutableLiveData<List<Dynamic>> liveData;
-    private List<Dynamic> dynamics;
+    private List<Dynamic> dynamics = new ArrayList<>();
 
     public DynamicViewModel() {
         liveData = new MutableLiveData<>();
-        dynamics = LitePal.findAll(Dynamic.class, true);
-        liveData.postValue(dynamics);
     }
 
     public void refreshData() {
         dynamics.clear();
-        dynamics.addAll(LitePal.findAll(Dynamic.class, true));
-        Collections.reverse(dynamics);
-
+        dynamics.addAll(LitePal.order("id desc").find(Dynamic.class, true));
         for (int i = 0; i < dynamics.size(); i++) {
             Log.d("dynamics", dynamics.get(i).toString());
         }

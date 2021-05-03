@@ -1,7 +1,6 @@
 package com.xx.fire.activity.dynamic;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -23,17 +22,17 @@ import com.xx.fire.R;
 import com.xx.fire.UserUtil;
 import com.xx.fire.activity.BaseActivity;
 import com.xx.fire.activity.PicShowActivity;
-import com.xx.fire.activity.newsdetail.NewsDetailViewModel;
 import com.xx.fire.adapter.ItemChildPicAdapter;
 import com.xx.fire.adapter.ItemCommentAdapter;
 import com.xx.fire.model.Comment;
 import com.xx.fire.model.Dynamic;
 import com.xx.fire.model.MediaData;
-import com.xx.fire.model.News;
 import com.xx.fire.view.InputCommentDialog;
 import com.xx.fire.view.RecycleViewDivider;
 
-import java.lang.annotation.Native;
+import org.litepal.LitePal;
+
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -107,7 +106,7 @@ class DynamicDetailActivity extends BaseActivity {
                                     .setNegativeButton("确定", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                            int succeed = dynamic.delete();
+                                            LitePal.delete(Dynamic.class, dynamic.getId());
                                             finish();
                                         }
                                     }).create().show();
@@ -146,7 +145,8 @@ class DynamicDetailActivity extends BaseActivity {
                             public void onItemClick(MediaData data, int position) {
                                 if (data.getType() == 0) {
                                     Bundle bundle = new Bundle();
-                                    bundle.putSerializable("mediaData", data);
+                                    bundle.putInt("position", position);
+                                    bundle.putSerializable("list", (Serializable) viewModel.getData().getValue().getMedia_list());
                                     ActivityUtils.startActivity(bundle, PicShowActivity.class);
                                 }
                             }
@@ -171,7 +171,7 @@ class DynamicDetailActivity extends BaseActivity {
                         commentAdapter.setOnItemActionListener(new ItemCommentAdapter.OnItemActionListener() {
                             @Override
                             public void onComment(Comment comment, int position) {
-                                showCommentDialog(comment, "回复@" + comment.getComment_username() + ":");
+                                showCommentDialog(comment, "回复@" + comment.getUser().getNickname() + ":");
                             }
                         });
                         recyclerComment.setAdapter(commentAdapter);

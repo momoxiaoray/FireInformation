@@ -1,4 +1,4 @@
-package com.xx.fire.activity.newsdetail;
+package com.xx.fire.activity.information;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import com.xx.fire.model.News;
 
 import butterknife.BindView;
 
-public class NewsDetailActivity extends BaseActivity {
+public class KnowledgeDetailActivity extends BaseActivity {
 
     @BindView(R.id.news_title)
     TextView newsTitle;
@@ -23,25 +23,25 @@ public class NewsDetailActivity extends BaseActivity {
     TextView newsDate;
     @BindView(R.id.content)
     TextView newsContent;
-    private NewsDetailViewModel viewModel;
+    private DetailViewModel viewModel;
     private News newsData;
 
     @Override
     public void initExtras(Bundle bundle) {
         super.initExtras(bundle);
         newsData = (News) bundle.getSerializable("data");
-        viewModel = new ViewModelProvider(this).get(NewsDetailViewModel.class);
+        viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
         viewModel.setData(newsData);
     }
 
     @Override
     public int bindLayout() {
-        return R.layout.activity_news_detail;
+        return R.layout.activity_knowledge_detail;
     }
 
     @Override
     protected String initTitle() {
-        return newsData.getNews_type() == 0 ? getString(R.string.news_title_1) : getString(R.string.news_title_2);
+        return getString(R.string.news_title_1);
     }
 
     @Override

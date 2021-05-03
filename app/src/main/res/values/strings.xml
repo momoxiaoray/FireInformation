@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">消防安全</string>
+    <string name="app_name">消防知识</string>
 
 
     <string name="title_home">首页</string>
@@ -11,4 +11,7 @@
     <string name="scan_count">浏览数:%1$d</string>
 
     <string name="recover">回复</string>
+    <string name="title_activity_mannager_main">MannagerMainActivity</string>
+    <string name="tab_text_1">@string/news_title_1</string>
+    <string name="tab_text_2">@string/news_title_2</string>
 </resources>

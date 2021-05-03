@@ -26,11 +26,11 @@ public class HomeFragment extends Fragment {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private String[] tabs = {"消防知识", "火灾新闻"};
+    private String[] tabs ;
     private List<ItemFragment> itemFragments =new ArrayList<>();
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        tabs = new String[]{getString(R.string.tab_text_1), getString(R.string.tab_text_2)};
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         tabLayout = root.findViewById(R.id.tab_layout);
         viewPager = root.findViewById(R.id.viewpager);

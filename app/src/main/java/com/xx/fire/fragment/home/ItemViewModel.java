@@ -25,7 +25,7 @@ public class ItemViewModel extends ViewModel {
 
     public LiveData<List<News>> getData(int style) {
         newsDatas.clear();
-        newsDatas.addAll(LitePal.where("news_type = ?", style + "").find(News.class, true));
+        newsDatas.addAll(LitePal.where("news_type = ?", style + "").order("id desc").find(News.class, true));
         for (int i = 0; i < newsDatas.size(); i++) {
             Log.d("News", newsDatas.get(i).toString());
         }

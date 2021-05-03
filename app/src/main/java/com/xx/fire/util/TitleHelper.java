@@ -216,6 +216,10 @@ public class TitleHelper {
         mRightText.setBackgroundResource(background);
     }
 
+    public void hideLeftButton() {
+        mLeftButton.setVisibility(View.INVISIBLE);
+    }
+
     public void setRightText(String text) {
         mRightText.setText(text);
     }
