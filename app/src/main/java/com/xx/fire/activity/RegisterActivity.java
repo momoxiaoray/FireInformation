@@ -95,6 +95,7 @@ public class RegisterActivity extends BaseActivity {
 
                             @Override
                             public void onNext(@NonNull Long aLong) {
+                                MProgressDialog.dismissProgress();
                                 User user = new User();
                                 user.setAccount(nameStr);
                                 user.setPassword(passWordStr);

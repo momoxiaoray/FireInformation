@@ -10,6 +10,7 @@ public class Comment extends LitePalSupport implements Serializable {
     private long id;
     private long user_id;//评论人id,用于查询
     private long dynamic_id;//动态id,用于查询
+    private long question_id;//问答id,用于查询
     private int style;//0评论，1回复
     private String comment_content;//评论内容
     private String recover_user;//评论的某人
@@ -20,6 +21,14 @@ public class Comment extends LitePalSupport implements Serializable {
     private Dynamic dynamic;
     //一个评论对应一个用户
     private User user;
+
+    public long getQuestion_id() {
+        return question_id;
+    }
+
+    public void setQuestion_id(long question_id) {
+        this.question_id = question_id;
+    }
 
     public long getDynamic_id() {
         return dynamic_id;

@@ -17,6 +17,7 @@ import com.xx.fire.R;
 import com.xx.fire.UserUtil;
 import com.xx.fire.activity.LoginActivity;
 import com.xx.fire.activity.collect.CollectActivity;
+import com.xx.fire.activity.question.MyQuestionActivity;
 import com.xx.fire.model.User;
 import com.xx.fire.util.T;
 
@@ -43,9 +44,12 @@ public class UserFragment extends Fragment {
         return root;
     }
 
-    @OnClick({R.id.collection, R.id.about, R.id.btn_login_out})
+    @OnClick({R.id.collection, R.id.about, R.id.btn_login_out,R.id.question})
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.question:
+                ActivityUtils.startActivity(MyQuestionActivity.class);
+                break;
             case R.id.collection:
                 ActivityUtils.startActivity(CollectActivity.class);
                 break;

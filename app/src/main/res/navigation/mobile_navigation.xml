@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_dynamic" />
 
     <fragment
+        android:id="@+id/navigation_question"
+        android:name="com.xx.fire.fragment.question.QuestionFragment"
+        android:label="@string/title_question"
+        tools:layout="@layout/fragment_question" />
+
+    <fragment
         android:id="@+id/navigation_user"
         android:name="com.xx.fire.fragment.user.UserFragment"
         android:label="@string/title_user"

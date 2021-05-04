@@ -60,6 +60,10 @@
             android:name=".activity.manager.edit.MangerNewsEditActivity"
             android:windowSoftInputMode="stateVisible" />
         <activity android:name=".activity.information.NewsDetailActivity" />
+        <activity android:name=".activity.question.QuestionAddActivity"
+            android:windowSoftInputMode="stateVisible"/>
+        <activity android:name=".activity.question.QuestionDetailActivity" />
+        <activity android:name=".activity.question.MyQuestionActivity" />
     </application>
 
 </manifest>

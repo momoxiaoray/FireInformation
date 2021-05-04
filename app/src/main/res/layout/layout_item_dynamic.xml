@@ -91,6 +91,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dip"
         android:id="@+id/item_recycler"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
         android:background="@drawable/bg_dynamic_comment"
