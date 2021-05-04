@@ -86,8 +86,8 @@ class QuestionDetailActivity extends BaseActivity {
         commentDialog = new InputCommentDialog.Builder(this);
         viewModel.getData().observe(this, new Observer<Question>() {
             @Override
-            public void onChanged(Question dynamic) {
-                if (dynamic.getUser().getAccount().equals(UserUtil.getCurrentUser().getAccount())) {
+            public void onChanged(Question question) {
+                if (question.getUser().getAccount().equals(UserUtil.getCurrentUser().getAccount())) {
                     item_delete.setVisibility(View.VISIBLE);
                     item_delete.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -103,7 +103,7 @@ class QuestionDetailActivity extends BaseActivity {
                                     .setNegativeButton("确定", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                            LitePal.delete(Dynamic.class, dynamic.getId());
+                                            LitePal.delete(Question.class, question.getId());
                                             finish();
                                         }
                                     }).create().show();
@@ -112,13 +112,13 @@ class QuestionDetailActivity extends BaseActivity {
                 } else {
                     item_delete.setVisibility(View.GONE);
                 }
-                name.setText(dynamic.getUser().getNickname());
-                time.setText(TimeUtils.getFriendlyTimeSpanByNow(dynamic.getDate()));
+                name.setText(question.getUser().getNickname());
+                time.setText(TimeUtils.getFriendlyTimeSpanByNow(question.getDate()));
                 //得到drawable对象，即所要插入的图片
                 Drawable d = mContext.getResources().getDrawable(R.mipmap.ic_zan);
                 zanCount.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
                 zanCount.setCompoundDrawablePadding(mContext.getResources().getDimensionPixelOffset(R.dimen.dp_4));
-                zanCount.setText(String.valueOf(dynamic.getZan()));
+                zanCount.setText(String.valueOf(question.getZan()));
                 zanCount.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -126,10 +126,10 @@ class QuestionDetailActivity extends BaseActivity {
                     }
                 });
                 //回复
-                commentCount.setText(String.valueOf(dynamic.getComment_list().size()));
-                content.setText(dynamic.getContent());
+                commentCount.setText(String.valueOf(question.getComment_list().size()));
+                content.setText(question.getContent());
                 //展示评论列表
-                List<Comment> comments = dynamic.getComment_list();
+                List<Comment> comments = question.getComment_list();
                 if (comments == null || comments.size() == 0) {
                     noCommentView.setVisibility(View.VISIBLE);
                 } else {
