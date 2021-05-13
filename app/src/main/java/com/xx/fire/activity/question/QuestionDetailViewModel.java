@@ -11,6 +11,7 @@ import com.xx.fire.UserUtil;
 import com.xx.fire.model.Comment;
 import com.xx.fire.model.Dynamic;
 import com.xx.fire.model.Question;
+import com.xx.fire.model.QuestionAnswer;
 
 import org.litepal.LitePal;
 
@@ -35,6 +36,23 @@ public class QuestionDetailViewModel extends ViewModel {
         question.setZan(zan + 1);
         question.saveOrUpdate();
         liveData.setValue(question);
+    }
+
+    public void selectAnswer(int childPosition) {
+        List<QuestionAnswer> answers = question.getAnswer();
+        for (int i = 0; i < answers.size(); i++) {
+            List<Long> userIds = answers.get(i).getUser_ids();
+            if (userIds.contains(UserUtil.getCurrentUser().getId())) {
+                userIds.remove(UserUtil.getCurrentUser().getId());
+                answers.get(i).setUser_ids(userIds);
+            }
+        }
+        List<Long> userIds = answers.get(childPosition).getUser_ids();
+        userIds.add(UserUtil.getCurrentUser().getId());
+        answers.get(childPosition).setUser_ids(userIds);
+//        answers.get(childPosition).update(answers.get(childPosition).getId());
+        question.setAnswer(answers);
+        question.update(question.getId());
     }
 
     public void addComment(Comment commentCome, String content) {

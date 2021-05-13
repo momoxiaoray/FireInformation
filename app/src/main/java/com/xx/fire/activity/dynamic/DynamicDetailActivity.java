@@ -143,12 +143,10 @@ class DynamicDetailActivity extends BaseActivity {
                         mediaAdapter.setOnItemActionListener(new ItemChildPicAdapter.OnItemActionListener() {
                             @Override
                             public void onItemClick(MediaData data, int position) {
-                                if (data.getType() == 0) {
-                                    Bundle bundle = new Bundle();
-                                    bundle.putInt("position", position);
-                                    bundle.putSerializable("list", (Serializable) viewModel.getData().getValue().getMedia_list());
-                                    ActivityUtils.startActivity(bundle, PicShowActivity.class);
-                                }
+                                Bundle bundle = new Bundle();
+                                bundle.putInt("position", position);
+                                bundle.putSerializable("list", (Serializable) viewModel.getData().getValue().getMedia_list());
+                                ActivityUtils.startActivity(bundle, PicShowActivity.class);
                             }
                         });
                         recycler.setAdapter(mediaAdapter);

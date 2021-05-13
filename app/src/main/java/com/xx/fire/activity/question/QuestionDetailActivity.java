@@ -6,7 +6,11 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -28,6 +32,7 @@ import com.xx.fire.model.Comment;
 import com.xx.fire.model.Dynamic;
 import com.xx.fire.model.MediaData;
 import com.xx.fire.model.Question;
+import com.xx.fire.model.QuestionAnswer;
 import com.xx.fire.view.InputCommentDialog;
 import com.xx.fire.view.RecycleViewDivider;
 
@@ -41,10 +46,8 @@ import butterknife.OnClick;
 
 public
 class QuestionDetailActivity extends BaseActivity {
-    @BindView(R.id.item_icon)
-    ImageView icon;
-    @BindView(R.id.item_name)
-    TextView name;
+    @BindView(R.id.answer_layout)
+    RadioGroup answerGroup;
     @BindView(R.id.item_time)
     TextView time;
     @BindView(R.id.item_comment)
@@ -87,32 +90,32 @@ class QuestionDetailActivity extends BaseActivity {
         viewModel.getData().observe(this, new Observer<Question>() {
             @Override
             public void onChanged(Question question) {
-                if (question.getUser().getAccount().equals(UserUtil.getCurrentUser().getAccount())) {
-                    item_delete.setVisibility(View.VISIBLE);
-                    item_delete.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            new AlertDialog.Builder(mContext)
-                                    .setMessage("是否删除")
-                                    .setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            dialogInterface.dismiss();
-                                        }
-                                    })
-                                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            LitePal.delete(Question.class, question.getId());
-                                            finish();
-                                        }
-                                    }).create().show();
-                        }
-                    });
-                } else {
-                    item_delete.setVisibility(View.GONE);
-                }
-                name.setText(question.getUser().getNickname());
+//                if (question.getUser().getAccount().equals(UserUtil.getCurrentUser().getAccount())) {
+//                    item_delete.setVisibility(View.VISIBLE);
+//                    item_delete.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            new AlertDialog.Builder(mContext)
+//                                    .setMessage("是否删除")
+//                                    .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialogInterface, int i) {
+//                                            dialogInterface.dismiss();
+//                                        }
+//                                    })
+//                                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialogInterface, int i) {
+//                                            LitePal.delete(Question.class, question.getId());
+//                                            finish();
+//                                        }
+//                                    }).create().show();
+//                        }
+//                    });
+//                } else {
+//                    item_delete.setVisibility(View.GONE);
+//                }
+
                 time.setText(TimeUtils.getFriendlyTimeSpanByNow(question.getDate()));
                 //得到drawable对象，即所要插入的图片
                 Drawable d = mContext.getResources().getDrawable(R.mipmap.ic_zan);
@@ -151,6 +154,33 @@ class QuestionDetailActivity extends BaseActivity {
                         commentAdapter.notifyDataSetChanged();
                     }
                     commentLayoutManager.scrollToPosition(0);
+                }
+
+                //答案
+                List<QuestionAnswer> answers = question.getAnswer();
+                if (answers != null && answers.size() > 0) {
+                    if (answerGroup.getChildCount() > 0) {
+                        return;
+                    }
+                    for (int i = 0; i < answers.size(); i++) {
+                        RadioButton radioButton = new RadioButton(mContext);
+                        radioButton.setTag(i);
+                        radioButton.setText(answers.get(i).getAnswer_content());
+                        radioButton.setTextColor(ContextCompat.getColor(mContext, R.color.grey_700));
+                        radioButton.setLayoutParams(new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        answerGroup.addView(radioButton);
+                        radioButton.setChecked(answers.get(i).getUser_ids().contains(UserUtil.getCurrentUser().getId()));
+                        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                                if (!compoundButton.isPressed()) {
+                                    return;
+                                }
+                                if (b)
+                                    viewModel.selectAnswer((Integer) compoundButton.getTag());
+                            }
+                        });
+                    }
                 }
             }
         });

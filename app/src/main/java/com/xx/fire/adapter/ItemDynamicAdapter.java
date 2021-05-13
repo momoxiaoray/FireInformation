@@ -1,7 +1,10 @@
 package com.xx.fire.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -16,10 +19,12 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.IntentUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.xx.fire.R;
 import com.xx.fire.UserUtil;
@@ -30,6 +35,7 @@ import com.xx.fire.model.MediaData;
 import com.xx.fire.model.News;
 import com.xx.fire.model.User;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
@@ -105,12 +111,10 @@ public class ItemDynamicAdapter extends RecyclerView.Adapter<ItemDynamicAdapter.
         adapter.setOnItemActionListener(new ItemChildPicAdapter.OnItemActionListener() {
             @Override
             public void onItemClick(MediaData data, int i) {
-                if (data.getType() == 0) {
                     Bundle bundle = new Bundle();
                     bundle.putInt("position", i);
                     bundle.putSerializable("list", (Serializable) mValues.get(position).getMedia_list());
                     ActivityUtils.startActivity(bundle, PicShowActivity.class);
-                }
             }
         });
         holder.recycler.setAdapter(adapter);

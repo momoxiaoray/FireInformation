@@ -54,6 +54,11 @@ public class ItemChildPicAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 .load(new File(mediaData.getPath()))
                 .apply(options)
                 .into(viewHolder.item_img);
+        if (mediaData.getType() == 1) {
+            viewHolder.item_type.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.item_type.setVisibility(View.GONE);
+        }
         viewHolder.item_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,11 +75,12 @@ public class ItemChildPicAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public class DataViewHolder extends RecyclerView.ViewHolder {
-        public ImageView item_img;
+        public ImageView item_img, item_type;
 
         public DataViewHolder(View view, ViewGroup parent) {
             super(view);
             item_img = view.findViewById(R.id.item_img);
+            item_type = view.findViewById(R.id.item_type);
         }
     }
 

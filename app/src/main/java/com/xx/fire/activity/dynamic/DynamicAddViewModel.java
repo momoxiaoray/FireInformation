@@ -62,7 +62,7 @@ public class DynamicAddViewModel extends ViewModel {
         this.imageItems.addAll(imageItems);
         for (int i = 0; i < imageItems.size(); i++) {
             MediaData mediaData = new MediaData();
-            mediaData.setType(0);
+            mediaData.setType(imageItems.get(i).type.startsWith("video") ? 1 : 0);
             mediaData.setPath(imageItems.get(i).path);
             mediaDataList.add(0, mediaData);
         }

@@ -13,5 +13,6 @@
         <mapping class="com.xx.fire.model.Dynamic"/>
         <mapping class="com.xx.fire.model.MediaData"/>
         <mapping class="com.xx.fire.model.Question"/>
+        <mapping class="com.xx.fire.model.QuestionAnswer"/>
     </list>
 </litepal>

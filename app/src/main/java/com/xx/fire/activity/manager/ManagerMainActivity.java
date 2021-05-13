@@ -21,6 +21,7 @@ import com.xx.fire.UserUtil;
 import com.xx.fire.activity.BaseActivity;
 import com.xx.fire.activity.LoginActivity;
 import com.xx.fire.fragment.manager.ItemMangerFragment;
+import com.xx.fire.fragment.manager.ManagerQuestionFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class ManagerMainActivity extends BaseActivity {
     @BindView(R.id.viewpager)
     ViewPager viewPager;
     private String[] tabs;
-    private List<ItemMangerFragment> itemFragments = new ArrayList<>();
+    private List<Fragment> itemFragments = new ArrayList<>();
     private long exitTime;
 
     @Override
@@ -49,7 +50,7 @@ public class ManagerMainActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState) {
         mTitleHelper.hideLeftButton();
-        tabs = new String[]{getString(R.string.tab_text_1), getString(R.string.tab_text_2)};
+        tabs = new String[]{getString(R.string.tab_text_1), getString(R.string.tab_text_2),getString(R.string.tab_text_3)};
         mTitleHelper.setOnRightTxClickListener("退出", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,10 +65,10 @@ public class ManagerMainActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context context) {
-
         for (int i = 0; i < 2; i++) {
             itemFragments.add(ItemMangerFragment.newInstance(i));
         }
+        itemFragments.add(ManagerQuestionFragment.newInstance());
         viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager(),
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             @NonNull

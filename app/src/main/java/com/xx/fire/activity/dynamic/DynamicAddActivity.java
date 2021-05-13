@@ -136,6 +136,7 @@ public class DynamicAddActivity extends BaseActivity {
                                     //参数说明：见下方`FileProvider的配置`
                                     .setFileProviderAuthority("com.xx.fire.fileprovider")
                                     .setCount(6)//参数说明：最大可选数，默认1
+                                    .setVideo(true)
                                     .setSelectedPhotos(viewModel.getImageItems())
                                     .setPuzzleMenu(false)
                                     .start(new SelectCallback() {
@@ -154,12 +155,10 @@ public class DynamicAddActivity extends BaseActivity {
 
                         @Override
                         public void onItemClick(MediaData data, int position) {
-                            if (data.getType() == 0) {
-                                Bundle bundle = new Bundle();
-                                bundle.putInt("position", position);
-                                bundle.putSerializable("list", (Serializable) viewModel.getMediaData());
-                                ActivityUtils.startActivity(bundle, PicShowActivity.class);
-                            }
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("position", position);
+                            bundle.putSerializable("list", (Serializable) viewModel.getMediaData());
+                            ActivityUtils.startActivity(bundle, PicShowActivity.class);
                         }
 
                         @Override

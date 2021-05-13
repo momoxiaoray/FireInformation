@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.xx.fire.UserUtil;
 import com.xx.fire.model.Dynamic;
 import com.xx.fire.model.Question;
+import com.xx.fire.model.QuestionAnswer;
 
 import org.litepal.LitePal;
 
@@ -34,7 +35,7 @@ public class QuestionViewModel extends ViewModel {
         }
 
         for (int i = 0; i < questions.size(); i++) {
-            Log.d("dynamics", questions.get(i).toString());
+            Log.d("questions", questions.get(i).toString());
         }
         liveData.setValue(questions);
     }
@@ -43,6 +44,39 @@ public class QuestionViewModel extends ViewModel {
         int zan = questions.get(position).getZan();
         questions.get(position).setZan(zan + 1);
         questions.get(position).save();
+        liveData.setValue(questions);
+    }
+
+    public void selectAnswer(int position, int childPosition) {
+        Question question = questions.get(position);
+        List<QuestionAnswer> answers = question.getAnswer();
+        //先移除之前的选择
+        for (int i = 0; i < answers.size(); i++) {
+            List<Long> userIds = answers.get(i).getUser_ids();
+            if (userIds.contains(UserUtil.getCurrentUser().getId())) {
+                userIds.remove(UserUtil.getCurrentUser().getId());
+                answers.get(i).setUser_ids(userIds);
+                answers.get(i).update(answers.get(i).getId());
+            }
+        }
+        List<QuestionAnswer> answers2 = LitePal.order("id desc").find(QuestionAnswer.class, true);
+        for (int i = 0; i < answers2.size(); i++) {
+            Log.d("answers2", answers2.get(i).toString());
+        }
+        List<Long> userIds = answers.get(childPosition).getUser_ids();
+        userIds.add(UserUtil.getCurrentUser().getId());
+        answers.get(childPosition).setUser_ids(userIds);
+        answers.get(childPosition).update(answers.get(childPosition).getId());
+        question.setAnswer(answers);
+        question.update(question.getId());
+        List<Question> questionList = LitePal.order("id desc").find(Question.class, true);
+        for (int i = 0; i < questionList.size(); i++) {
+            Log.d("questions", questionList.get(i).toString());
+        }
+        List<QuestionAnswer> answers1 = LitePal.order("id desc").find(QuestionAnswer.class, true);
+        for (int i = 0; i < answers1.size(); i++) {
+            Log.d("answers", answers1.get(i).toString());
+        }
         liveData.setValue(questions);
     }
 

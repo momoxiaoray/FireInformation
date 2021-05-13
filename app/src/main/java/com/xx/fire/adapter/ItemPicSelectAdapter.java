@@ -82,6 +82,11 @@ public class ItemPicSelectAdapter extends RecyclerView.Adapter<RecyclerView.View
                     .load(new File(mediaData.getPath()))
                     .apply(options)
                     .into(viewHolder.item_img);
+            if (mediaData.getType() == 1) {
+                viewHolder.type.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.type.setVisibility(View.GONE);
+            }
             viewHolder.delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -115,12 +120,13 @@ public class ItemPicSelectAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class DataViewHolder extends RecyclerView.ViewHolder {
-        public ImageView item_img, delete;
+        public ImageView item_img, delete, type;
 
         public DataViewHolder(View view, ViewGroup parent) {
             super(view);
             item_img = view.findViewById(R.id.item_img);
             delete = view.findViewById(R.id.delete);
+            type = view.findViewById(R.id.item_type);
         }
     }
 

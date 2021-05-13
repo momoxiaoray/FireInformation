@@ -13,10 +13,18 @@ public class Question extends LitePalSupport implements Serializable {
     private long user_id;//问答发布人id
     private String date;//日期
     private String content;//内容
+    private List<QuestionAnswer> answer=new ArrayList<>();
     private int zan;
-
     private List<Comment> comment_list = new ArrayList<>();
     private User user;
+
+    public List<QuestionAnswer> getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(List<QuestionAnswer> answer) {
+        this.answer = answer;
+    }
 
     public long getId() {
         return id;
@@ -84,6 +92,7 @@ public class Question extends LitePalSupport implements Serializable {
                 ", user_id=" + user_id +
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
+                ", answer=" + answer +
                 ", zan=" + zan +
                 ", comment_list=" + comment_list +
                 ", user=" + user +

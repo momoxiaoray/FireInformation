@@ -15,4 +15,5 @@
     <string name="title_activity_mannager_main">MannagerMainActivity</string>
     <string name="tab_text_1">@string/news_title_1</string>
     <string name="tab_text_2">@string/news_title_2</string>
+    <string name="tab_text_3">问答题目</string>
 </resources>

@@ -60,7 +60,7 @@
             android:name=".activity.manager.edit.MangerNewsEditActivity"
             android:windowSoftInputMode="stateVisible" />
         <activity android:name=".activity.information.NewsDetailActivity" />
-        <activity android:name=".activity.question.QuestionAddActivity"
+        <activity android:name=".activity.manager.quesition.QuestionAddActivity"
             android:windowSoftInputMode="stateVisible"/>
         <activity android:name=".activity.question.QuestionDetailActivity" />
         <activity android:name=".activity.question.MyQuestionActivity" />

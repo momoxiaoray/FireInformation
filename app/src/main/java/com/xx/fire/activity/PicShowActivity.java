@@ -1,6 +1,9 @@
 package com.xx.fire.activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -43,7 +47,7 @@ public class PicShowActivity extends BaseActivity {
 
     @Override
     protected String initTitle() {
-        return "图片展示";
+        return "动态展示";
     }
 
     @Override
@@ -61,12 +65,38 @@ public class PicShowActivity extends BaseActivity {
             @NonNull
             @Override
             public Object instantiateItem(@NonNull ViewGroup container, int position) {
-                ImageView pic = (ImageView) View.inflate(mContext, R.layout.layout_pic_show, null);
+                View layout = View.inflate(mContext, R.layout.layout_pic_show, null);
+                ImageView pic = layout.findViewById(R.id.pic);
                 Glide.with(mContext)
                         .load(new File(mediaDataList.get(position).getPath()))
                         .into(pic);
-                container.addView(pic);
-                return pic;
+                ImageView type = layout.findViewById(R.id.item_type);
+                if (mediaDataList.get(position).getType() == 1) {
+                    type.setVisibility(View.VISIBLE);
+                    pic.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (mediaDataList.get(position).getType() == 1) {
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                File file = new File(mediaDataList.get(position).getPath());
+                                Uri uri = null;
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    uri = FileProvider.getUriForFile(mContext, "com.xx.fire.fileprovider", file);
+                                } else {
+                                    uri = Uri.fromFile(file);
+                                }
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                intent.setDataAndType(uri, "video/*");
+                                mContext.startActivity(intent);
+                            }
+                        }
+                    });
+                } else {
+                    type.setVisibility(View.GONE);
+                }
+                container.addView(layout);
+                return layout;
             }
 
             @Override

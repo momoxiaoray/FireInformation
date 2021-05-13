@@ -84,7 +84,7 @@ public class InputCommentDialog extends Dialog {
             public void afterTextChanged(Editable editable) {
                 if (editable.length() > 100) {
                     editable.delete(editable.length() - 1, editable.length());
-                    T.showToast("评论超过字数啦");
+                    T.showToast("超过字数啦");
                 }
             }
         });

@@ -6,30 +6,21 @@
     android:layout_height="match_parent">
 
 
-    <ImageView
-        android:id="@+id/item_icon"
-        android:layout_width="@dimen/dp_38"
-        android:layout_height="@dimen/dp_38"
-        android:layout_margin="@dimen/dp_12"
-        android:src="@drawable/ic_user_logo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/item_name"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginLeft="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_4"
         android:layout_marginRight="@dimen/dp_12"
         android:ellipsize="end"
         android:lines="1"
-        android:text="哟哟哟哟"
+        android:text="问答题目:"
         android:textColor="@color/red_400"
         android:textSize="@dimen/sp_14"
-        app:layout_constraintLeft_toRightOf="@+id/item_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_icon" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/item_delete"
@@ -40,10 +31,10 @@
         android:layout_marginRight="@dimen/dp_16"
         android:ellipsize="end"
         android:lines="1"
-        android:visibility="gone"
         android:text="删除"
         android:textColor="@color/grey_500"
         android:textSize="@dimen/sp_14"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/item_icon"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/item_icon" />
@@ -56,8 +47,9 @@
         android:text="3分钟前"
         android:textColor="#999999"
         android:textSize="@dimen/sp_11"
+        app:layout_constraintBottom_toBottomOf="@+id/item_zan"
         app:layout_constraintLeft_toLeftOf="@+id/item_name"
-        app:layout_constraintTop_toBottomOf="@+id/item_name" />
+        app:layout_constraintTop_toTopOf="@+id/item_zan" />
 
 
     <TextView
@@ -72,14 +64,25 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toLeftOf="@+id/item_time"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/item_name" />
 
+    <RadioGroup
+        android:id="@+id/answer_layout"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/item_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_content">
+
+
+    </RadioGroup>
 
     <TextView
         android:id="@+id/item_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_16"
         android:drawableLeft="@mipmap/ic_comment"
         android:drawablePadding="@dimen/dp_4"
         android:gravity="center_vertical"
@@ -87,8 +90,8 @@
         android:text="0"
         android:textColor="#999999"
         android:textSize="@dimen/sp_12"
-        app:layout_constraintRight_toRightOf="@+id/item_content"
-        app:layout_constraintTop_toBottomOf="@+id/item_content" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answer_layout" />
 
 
     <TextView
@@ -112,7 +115,7 @@
         android:layout_height="0.5dp"
         android:layout_marginTop="@dimen/dp_8"
         android:background="@color/grey_300"
-        app:layout_constraintLeft_toLeftOf="@+id/item_icon"
+        app:layout_constraintLeft_toLeftOf="@+id/item_content"
         app:layout_constraintRight_toRightOf="@+id/item_content"
         app:layout_constraintTop_toBottomOf="@+id/item_zan" />
 
@@ -120,7 +123,7 @@
         android:id="@+id/comment_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginLeft="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_16"
         android:layout_marginBottom="@dimen/dp_16"
         android:text="评论"
