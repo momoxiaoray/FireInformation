@@ -3,7 +3,7 @@
     <!--    数据库名称-->
     <dbname value="FireInformation" />
     <!--    数据库版本-->
-    <version value="1" />
+    <version value="5" />
     <!--    映射模型-->
     <list>
         <!--        这里需要完整的模型-->
@@ -14,5 +14,6 @@
         <mapping class="com.xx.fire.model.MediaData"/>
         <mapping class="com.xx.fire.model.Question"/>
         <mapping class="com.xx.fire.model.QuestionAnswer"/>
+        <mapping class="com.xx.fire.model.QuestionAnswerUser"/>
     </list>
 </litepal>

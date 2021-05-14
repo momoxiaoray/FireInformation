@@ -23,6 +23,9 @@ import com.xx.fire.R;
 import com.xx.fire.activity.manager.quesition.QuestionAddActivity;
 import com.xx.fire.adapter.ItemManagerQuestionAdapter;
 import com.xx.fire.model.Question;
+import com.xx.fire.model.QuestionAnswer;
+import com.xx.fire.view.AnswerInputDialog;
+import com.xx.fire.view.AnswerSelectDialog;
 import com.xx.fire.view.RecycleViewDivider;
 
 import java.util.List;
@@ -35,6 +38,8 @@ public class ManagerQuestionFragment extends Fragment {
     private ItemManagerQuestionAdapter adapter;
     private TextView no_data_view;
     private FloatingActionButton addButton;
+    private AnswerInputDialog.Builder answerInputDialog;
+    private AnswerSelectDialog.Builder answerSelectDialog;
 
     public static ManagerQuestionFragment newInstance() {
         ManagerQuestionFragment fragment = new ManagerQuestionFragment();
@@ -46,6 +51,8 @@ public class ManagerQuestionFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        answerInputDialog = new AnswerInputDialog.Builder(getContext());
+        answerSelectDialog = new AnswerSelectDialog.Builder(getContext());
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -93,6 +100,28 @@ public class ManagerQuestionFragment extends Fragment {
                                             viewModel.delete(position);
                                         }
                                     }).create().show();
+                        }
+
+                        @Override
+                        public void selectRight(Question item, int position) {
+                            if (item.getAnswer().size() > 0) {
+                                answerSelectDialog.setData(item.getAnswer()).setOnSelectListener(new AnswerSelectDialog.OnSelectListener() {
+                                    @Override
+                                    public void onSelect(QuestionAnswer answer) {
+                                        viewModel.answerPublish(item, answer);
+                                        answerSelectDialog.cancel();
+                                    }
+                                }).create().show();
+                            } else {
+                                answerInputDialog.setSureClickListener(new AnswerInputDialog.InputDialogBtnClickListener() {
+
+                                    @Override
+                                    public void onClick(String content) {
+                                        viewModel.answerPublish(item, content);
+                                        answerInputDialog.cancel();
+                                    }
+                                }).create().show();
+                            }
                         }
                     });
                     dataRecycler.setAdapter(adapter);

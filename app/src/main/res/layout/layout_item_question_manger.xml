@@ -49,11 +49,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginRight="@dimen/dp_16"
         android:text="2020-10-10"
         android:textColor="#999999"
-        android:layout_marginRight="@dimen/dp_16"
         android:textSize="@dimen/sp_11"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer_layout" />
 
+
+    <TextView
+        android:id="@+id/publish_right_content"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:padding="@dimen/dp_6"
+        android:text="正确答案："
+        android:textColor="@color/red_300"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="@+id/item_content"
+        app:layout_constraintRight_toRightOf="@+id/item_time"
+        app:layout_constraintTop_toBottomOf="@+id/item_time" />
+
+    <TextView
+        android:id="@+id/publish_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/red_300"
+        android:gravity="center"
+        android:padding="@dimen/dp_6"
+        android:text="公布正确答案"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintLeft_toLeftOf="@+id/item_content"
+        app:layout_constraintTop_toBottomOf="@+id/publish_right_content" />
 </androidx.constraintlayout.widget.ConstraintLayout>

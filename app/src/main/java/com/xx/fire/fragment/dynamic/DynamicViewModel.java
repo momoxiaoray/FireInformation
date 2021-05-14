@@ -11,6 +11,7 @@ import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.xx.fire.UserUtil;
 import com.xx.fire.model.Dynamic;
+import com.xx.fire.model.Question;
 
 import org.litepal.LitePal;
 
@@ -27,9 +28,14 @@ public class DynamicViewModel extends ViewModel {
         liveData = new MutableLiveData<>();
     }
 
-    public void refreshData() {
+    public void refreshData(boolean self) {
         dynamics.clear();
-        dynamics.addAll(LitePal.order("id desc").find(Dynamic.class, true));
+        if (self) {
+            dynamics.addAll(LitePal.where("user_id = ?", String.valueOf(UserUtil.getCurrentUser().getId()))
+                    .order("id desc").find(Dynamic.class, true));
+        } else {
+            dynamics.addAll(LitePal.order("id desc").find(Dynamic.class, true));
+        }
         for (int i = 0; i < dynamics.size(); i++) {
             Log.d("dynamics", dynamics.get(i).toString());
         }

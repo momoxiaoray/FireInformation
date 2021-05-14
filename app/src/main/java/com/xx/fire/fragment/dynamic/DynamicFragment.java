@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -20,6 +21,7 @@ import com.xx.fire.R;
 import com.xx.fire.activity.dynamic.DynamicAddActivity;
 import com.xx.fire.activity.dynamic.DynamicDetailActivity;
 import com.xx.fire.adapter.ItemDynamicAdapter;
+import com.xx.fire.fragment.question.QuestionFragment;
 import com.xx.fire.model.Dynamic;
 import com.xx.fire.view.RecycleViewDivider;
 
@@ -33,6 +35,23 @@ public class DynamicFragment extends Fragment {
     private ItemDynamicAdapter adapter;
     private TextView no_data_view;
     private FloatingActionButton addButton;
+    private boolean self = false;
+
+    public static DynamicFragment newInstance(boolean self) {
+        DynamicFragment fragment = new DynamicFragment();
+        Bundle args = new Bundle();
+        args.putBoolean("self", self);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            self = getArguments().getBoolean("self");
+        }
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +67,9 @@ public class DynamicFragment extends Fragment {
                 ActivityUtils.startActivity(DynamicAddActivity.class);
             }
         });
+        if (self) {
+            addButton.setVisibility(View.GONE);
+        }
         dataRecycler.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayoutManager.HORIZONTAL, 1,
                 ContextCompat.getColor(getContext(), R.color.grey_300)));
         viewModel.getData().observe(getViewLifecycleOwner(), new Observer<List<Dynamic>>() {
@@ -84,6 +106,6 @@ public class DynamicFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.refreshData();
+        viewModel.refreshData(self);
     }
 }

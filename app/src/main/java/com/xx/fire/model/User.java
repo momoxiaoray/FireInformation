@@ -25,6 +25,16 @@ public class User extends LitePalSupport implements Serializable {
     //一个用户多个评论
     private List<Comment> comments = new ArrayList<>();
 
+    private List<QuestionAnswer> answers =new ArrayList<>();
+
+    public List<QuestionAnswer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<QuestionAnswer> answers) {
+        this.answers = answers;
+    }
+
     public List<Comment> getComments() {
         return comments;
     }

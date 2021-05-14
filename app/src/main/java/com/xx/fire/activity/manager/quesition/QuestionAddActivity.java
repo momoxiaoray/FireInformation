@@ -92,6 +92,10 @@ public class QuestionAddActivity extends BaseActivity {
                     ToastUtils.showShort("请输入内容");
                     return;
                 }
+                if (!questionAddViewModel.checkSave()) {
+                    ToastUtils.showShort("添加答案至少两个");
+                    return;
+                }
                 MProgressDialog.showProgress(mContext);
                 questionAddViewModel.save(content);
                 Observable.timer(1, TimeUnit.SECONDS)

@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.blankj.utilcode.util.TimeUtils;
 import com.xx.fire.UserUtil;
+import com.xx.fire.model.QuestionAnswerUser;
 import com.xx.fire.model.Comment;
-import com.xx.fire.model.Dynamic;
 import com.xx.fire.model.Question;
 import com.xx.fire.model.QuestionAnswer;
 
@@ -34,25 +34,25 @@ public class QuestionDetailViewModel extends ViewModel {
     public void hit() {
         int zan = question.getZan();
         question.setZan(zan + 1);
-        question.saveOrUpdate();
+        question.update(question.getId());
         liveData.setValue(question);
     }
 
     public void selectAnswer(int childPosition) {
         List<QuestionAnswer> answers = question.getAnswer();
         for (int i = 0; i < answers.size(); i++) {
-            List<Long> userIds = answers.get(i).getUser_ids();
-            if (userIds.contains(UserUtil.getCurrentUser().getId())) {
-                userIds.remove(UserUtil.getCurrentUser().getId());
-                answers.get(i).setUser_ids(userIds);
+            List<QuestionAnswerUser> relationships = answers.get(i).getUser_ids();
+            for (int j = 0; j < relationships.size(); j++) {
+                if (relationships.get(j).getUser_id() == UserUtil.getCurrentUser().getId()) {
+                    relationships.get(j).delete();
+                    break;
+                }
             }
         }
-        List<Long> userIds = answers.get(childPosition).getUser_ids();
-        userIds.add(UserUtil.getCurrentUser().getId());
-        answers.get(childPosition).setUser_ids(userIds);
-//        answers.get(childPosition).update(answers.get(childPosition).getId());
-        question.setAnswer(answers);
-        question.update(question.getId());
+        QuestionAnswerUser relationship =new QuestionAnswerUser();
+        relationship.setAnswer_id(answers.get(childPosition).getId());
+        relationship.setUser_id(UserUtil.getCurrentUser().getId());
+        relationship.save();
     }
 
     public void addComment(Comment commentCome, String content) {

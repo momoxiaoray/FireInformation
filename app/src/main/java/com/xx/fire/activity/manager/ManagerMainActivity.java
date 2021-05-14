@@ -69,6 +69,7 @@ public class ManagerMainActivity extends BaseActivity {
             itemFragments.add(ItemMangerFragment.newInstance(i));
         }
         itemFragments.add(ManagerQuestionFragment.newInstance());
+        viewPager.setOffscreenPageLimit(itemFragments.size());
         viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager(),
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             @NonNull

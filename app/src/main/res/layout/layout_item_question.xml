@@ -6,6 +6,18 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/dp_12">
 
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="问答题目:"
+        android:textColor="@color/red_400"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/item_content"
@@ -18,20 +30,35 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/item_name" />
 
 
     <LinearLayout
-        android:orientation="vertical"
         android:id="@+id/answer_layout"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="@+id/item_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_content">
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/publish_right_content"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:paddingTop="@dimen/dp_6"
+        android:paddingBottom="@dimen/dp_6"
+        android:text="正确答案："
+        android:textColor="@color/red_300"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="@+id/item_content"
+        app:layout_constraintRight_toRightOf="@+id/item_content"
+        app:layout_constraintTop_toBottomOf="@+id/answer_layout" />
 
     <TextView
         android:id="@+id/item_comment"
@@ -45,7 +72,7 @@
         android:textColor="#999999"
         android:textSize="@dimen/sp_12"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answer_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/publish_right_content" />
 
     <TextView
         android:id="@+id/item_zan"
@@ -73,7 +100,7 @@
         android:textSize="@dimen/sp_11"
         app:layout_constraintBottom_toBottomOf="@+id/item_zan"
         app:layout_constraintLeft_toLeftOf="@+id/item_content"
-        app:layout_constraintTop_toBottomOf="@+id/answer_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/publish_right_content" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

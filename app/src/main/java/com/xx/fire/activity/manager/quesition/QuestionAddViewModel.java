@@ -26,7 +26,7 @@ public class QuestionAddViewModel extends ViewModel {
     }
 
     public void save(String content) {
-        Question question =new Question();
+        Question question = new Question();
         question.setContent(content);
         if (answerList.size() > 0) {
             for (int i = 0; i < answerList.size(); i++) {
@@ -36,6 +36,13 @@ public class QuestionAddViewModel extends ViewModel {
         question.setAnswer(answerList);
         question.setDate(TimeUtils.getNowString());
         question.save();
+    }
+
+    public boolean checkSave() {
+        if (answerList.size() == 1) {
+            return false;
+        }
+        return true;
     }
 
     public void addAnswer(String answerContent) {

@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.xx.fire.UserUtil;
 import com.xx.fire.model.Question;
+import com.xx.fire.model.QuestionAnswer;
 
 import org.litepal.LitePal;
 
@@ -36,6 +38,20 @@ public class ManagerQuestionViewModel extends ViewModel {
         questions.get(position).delete();
         questions.remove(position);
         liveData.setValue(questions);
+    }
+
+    public void answerPublish(Question question, String answer){
+        question.setRight_answer_id(0);
+        question.setRight_answer(answer);
+        question.update(question.getId());
+        refreshData();
+    }
+
+    public void answerPublish(Question question, QuestionAnswer answer){
+        question.setRight_answer_id(answer.getId());
+        question.setRight_answer("");
+        question.update(question.getId());
+        refreshData();
     }
 
     public LiveData<List<Question>> getData() {

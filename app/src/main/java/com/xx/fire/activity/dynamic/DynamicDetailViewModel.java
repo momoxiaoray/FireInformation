@@ -35,7 +35,7 @@ public class DynamicDetailViewModel extends ViewModel {
     public void hit() {
         int zan = dynamic.getZan();
         dynamic.setZan(zan + 1);
-        dynamic.saveOrUpdate();
+        dynamic.update(dynamic.getId());
         liveData.setValue(dynamic);
     }
 

@@ -33,7 +33,6 @@ public class QuestionFragment extends Fragment {
     private RecyclerView dataRecycler;
     private ItemQuestionAdapter adapter;
     private TextView no_data_view;
-    private FloatingActionButton addButton;
     private boolean self = false;
 
     public static QuestionFragment newInstance(boolean self) {
@@ -56,16 +55,9 @@ public class QuestionFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         viewModel =
                 new ViewModelProvider(this).get(QuestionViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dynamic, container, false);
+        View root = inflater.inflate(R.layout.fragment_question, container, false);
         dataRecycler = root.findViewById(R.id.recycler);
         no_data_view = root.findViewById(R.id.no_data_view);
-        addButton = root.findViewById(R.id.btn_add);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityUtils.startActivity(QuestionAddActivity.class);
-            }
-        });
         dataRecycler.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayoutManager.HORIZONTAL, 1,
                 ContextCompat.getColor(getContext(), R.color.grey_300)));
 
@@ -94,7 +86,6 @@ public class QuestionFragment extends Fragment {
 
                         @Override
                         public void onAnswerSelect(Question item, int position, int childPosition) {
-                            viewModel.selectAnswer(position, childPosition);
                         }
                     });
                     dataRecycler.setAdapter(adapter);
