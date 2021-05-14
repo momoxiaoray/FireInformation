@@ -73,7 +73,7 @@ public class ItemManagerQuestionAdapter extends RecyclerView.Adapter<ItemManager
                 TextView answer = new TextView(mContext);
                 answer.setTag(i);
                 answer.setTextSize(TypedValue.COMPLEX_UNIT_SP,12);
-                answer.setText(String.format("%d、%s", i + 1, answers.get(i).getAnswer_content()));
+                answer.setText(String.format("%d、%s(%s人选择)", i + 1, answers.get(i).getAnswer_content(),answers.get(i).getUser_ids().size()));
                 answer.setTextColor(ContextCompat.getColor(mContext, R.color.grey_800));
                 answer.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT));
