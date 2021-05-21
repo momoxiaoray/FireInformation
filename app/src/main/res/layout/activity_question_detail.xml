@@ -84,10 +84,11 @@
         android:gravity="top|left"
         android:paddingTop="@dimen/dp_6"
         android:paddingBottom="@dimen/dp_6"
-        android:text="正确答案："
+        android:layout_marginLeft="@dimen/dp_8"
+        android:text="显示答案"
         android:textColor="@color/red_300"
         android:textSize="@dimen/sp_12"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintLeft_toLeftOf="@+id/item_content"
         app:layout_constraintRight_toRightOf="@+id/item_content"
         app:layout_constraintTop_toBottomOf="@+id/answer_layout" />

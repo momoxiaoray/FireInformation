@@ -136,10 +136,10 @@ class QuestionDetailActivity extends BaseActivity {
                         RadioButton radioButton = new RadioButton(mContext);
                         radioButton.setTag(i);
                         radioButton.setGravity(Gravity.CENTER_VERTICAL);
-                        radioButton.setTextSize(TypedValue.COMPLEX_UNIT_SP,12);
+                        radioButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                         radioButton.setText(answers.get(i).getAnswer_content());
                         radioButton.setTextColor(ContextCompat.getColor(mContext, R.color.grey_700));
-                        RadioGroup.LayoutParams layoutParams= new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         layoutParams.rightMargin = (int) mContext.getResources().getDimension(R.dimen.dp_12);
                         layoutParams.topMargin = (int) mContext.getResources().getDimension(R.dimen.dp_8);
                         radioButton.setLayoutParams(layoutParams);
@@ -161,19 +161,28 @@ class QuestionDetailActivity extends BaseActivity {
                     }
                 }
                 //正确答案
-                if (question.getRight_answer_id() > 0) {
-                    //表示记录的是正确答案id，去数据库中查这个答案即可
-                    publish_right_content.setVisibility(View.VISIBLE);
-                    QuestionAnswer answer = LitePal.find(QuestionAnswer.class, question.getRight_answer_id());
-                    publish_right_content.setText("正确答案:" + answer.getAnswer_content());
-                } else {
-                    if (StringUtils.isEmpty(question.getRight_answer())) {
-                        publish_right_content.setVisibility(View.GONE);
-                    }else {
-                        publish_right_content.setVisibility(View.VISIBLE);
-                        publish_right_content.setText("正确答案:" + question.getRight_answer());
-                    }
-                }
+//                if (question.getRight_answer_id() > 0) {
+//                    //表示记录的是正确答案id，去数据库中查这个答案即可
+//                    publish_right_content.setVisibility(View.VISIBLE);
+//                    QuestionAnswer answer = LitePal.find(QuestionAnswer.class, question.getRight_answer_id());
+//                    publish_right_content.setText("正确答案:" + answer.getAnswer_content());
+//                } else {
+//                    if (StringUtils.isEmpty(question.getRight_answer())) {
+//                        publish_right_content.setVisibility(View.GONE);
+//                    }else {
+//                        publish_right_content.setVisibility(View.VISIBLE);
+//                        publish_right_content.setText("正确答案:" + question.getRight_answer());
+//                    }
+//                }
+            }
+        });
+
+        publish_right_content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                long answer_id = viewModel.getData().getValue().getRight_answer_id();
+                QuestionAnswer answer = LitePal.find(QuestionAnswer.class, answer_id);
+                publish_right_content.setText("正确答案:" + answer.getAnswer_content());
             }
         });
     }

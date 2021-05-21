@@ -41,6 +41,10 @@ public class Question extends LitePalSupport implements Serializable {
         return answer;
     }
 
+    public List<QuestionAnswer> getLocalAnswer() {
+        return answer;
+    }
+
     public void setAnswer(List<QuestionAnswer> answer) {
         this.answer = answer;
     }

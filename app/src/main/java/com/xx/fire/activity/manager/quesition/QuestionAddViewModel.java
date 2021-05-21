@@ -18,28 +18,22 @@ import java.util.List;
 
 public class QuestionAddViewModel extends ViewModel {
 
-    private MutableLiveData<List<QuestionAnswer>> liveData;
+    private MutableLiveData<Question> liveData;
     private List<QuestionAnswer> answerList = new ArrayList<>();
-
+    private  Question question ;
     public QuestionAddViewModel() {
         liveData = new MutableLiveData<>();
+        question = new Question();
     }
 
     public void save(String content) {
-        Question question = new Question();
         question.setContent(content);
-        if (answerList.size() > 0) {
-            for (int i = 0; i < answerList.size(); i++) {
-                answerList.get(i).save();
-            }
-        }
-        question.setAnswer(answerList);
         question.setDate(TimeUtils.getNowString());
         question.save();
     }
 
     public boolean checkSave() {
-        if (answerList.size() == 1) {
+        if (answerList.size() < 2) {
             return false;
         }
         return true;
@@ -48,17 +42,29 @@ public class QuestionAddViewModel extends ViewModel {
     public void addAnswer(String answerContent) {
         QuestionAnswer answer = new QuestionAnswer();
         answer.setAnswer_content(answerContent);
+        answer.save();
         answerList.add(answer);
-        liveData.setValue(answerList);
+        question.setAnswer(answerList);
+        liveData.setValue(question);
     }
 
     public void deleteAnswer(QuestionAnswer answer) {
+        answer.delete();
         answerList.remove(answer);
-        liveData.setValue(answerList);
+        question.setAnswer(answerList);
+        liveData.setValue(question);
+    }
+
+    public List<QuestionAnswer> getAnswers() {
+        return answerList;
+    }
+
+    public void saveRightAnswerId(QuestionAnswer answer) {
+        question.setRight_answer_id(answer.getId());
     }
 
 
-    public LiveData<List<QuestionAnswer>> getData() {
+    public LiveData<Question> getData() {
         return liveData;
     }
 }

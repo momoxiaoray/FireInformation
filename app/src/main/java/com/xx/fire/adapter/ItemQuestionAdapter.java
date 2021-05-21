@@ -104,6 +104,7 @@ public class ItemQuestionAdapter extends RecyclerView.Adapter<ItemQuestionAdapte
                 textView.setTag(i);
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,12);
                 textView.setText(String.format("%d、%s", i + 1, answers.get(i).getAnswer_content()));
+//                textView.setText(String.format("%d、%s(%s人选择)", i + 1, answers.get(i).getAnswer_content(),answers.get(i).getUser_ids().size()));
                 textView.setTextColor(ContextCompat.getColor(mContext, R.color.grey_700));
                 textView.setLayoutParams(new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 holder.answerGroup.addView(textView);
@@ -111,20 +112,21 @@ public class ItemQuestionAdapter extends RecyclerView.Adapter<ItemQuestionAdapte
         } else {
             holder.answerGroup.setVisibility(View.GONE);
         }
-
-        if (question.getRight_answer_id() > 0) {
-            //表示记录的是正确答案id，去数据库中查这个答案即可
-            holder.publish_right_content.setVisibility(View.VISIBLE);
-            QuestionAnswer answer = LitePal.find(QuestionAnswer.class, question.getRight_answer_id());
-            holder.publish_right_content.setText("正确答案:" + answer.getAnswer_content());
-        } else {
-            if (StringUtils.isEmpty(question.getRight_answer())) {
-                holder.publish_right_content.setVisibility(View.GONE);
-            }else {
-                holder.publish_right_content.setVisibility(View.VISIBLE);
-                holder.publish_right_content.setText("正确答案:" + question.getRight_answer());
-            }
-        }
+        // TODO: 5/21/21 列表屏蔽正确答案，正确答案在详情里面去显示
+        holder.publish_right_content.setVisibility(View.GONE);
+//        if (question.getRight_answer_id() > 0) {
+//            //表示记录的是正确答案id，去数据库中查这个答案即可
+//            holder.publish_right_content.setVisibility(View.VISIBLE);
+//            QuestionAnswer answer = LitePal.find(QuestionAnswer.class, question.getRight_answer_id());
+//            holder.publish_right_content.setText("正确答案:" + answer.getAnswer_content());
+//        } else {
+//            if (StringUtils.isEmpty(question.getRight_answer())) {
+//                holder.publish_right_content.setVisibility(View.GONE);
+//            }else {
+//                holder.publish_right_content.setVisibility(View.VISIBLE);
+//                holder.publish_right_content.setText("正确答案:" + question.getRight_answer());
+//            }
+//        }
     }
 
 

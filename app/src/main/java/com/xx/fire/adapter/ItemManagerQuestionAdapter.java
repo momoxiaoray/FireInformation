@@ -97,14 +97,14 @@ public class ItemManagerQuestionAdapter extends RecyclerView.Adapter<ItemManager
             }
         }
 
-        holder.publish_right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (actionListener != null) {
-                    actionListener.selectRight(question, position);
-                }
-            }
-        });
+//        holder.publish_right.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (actionListener != null) {
+//                    actionListener.selectRight(question, position);
+//                }
+//            }
+//        });
     }
 
 
